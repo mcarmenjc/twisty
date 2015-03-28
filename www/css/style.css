@@ -92,6 +92,11 @@
  	width: auto !important;
   
 }
+
+.place-map {
+    height: 50% !important;
+}
+
 .scroll{
   	height:100% !important
 }

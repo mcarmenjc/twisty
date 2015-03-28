@@ -1,0 +1,10 @@
+Key for browser applications
+
+API key	
+AIzaSyCKozDnCSMVBcsb4utpP1g_svFWag1J-sE
+Referers	
+Any referer allowed
+Activation date	
+Mar 28, 2015, 3:48:00 AM
+Activated by	
+matrimc@gmail.com (you)

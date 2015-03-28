@@ -62,7 +62,12 @@ angular.module('twisty.controllers', [])
 	$scope.places = twistyService.getDashboard($stateParams.categoryId, $stateParams.minutes);
 	$scope.nearestPlace = $scope.places[0];
 
-	function getLatitudeAndLongitude () {
+	var map = new google.maps.Map(document.getElementById('map-canvas'), {
+        center: here,
+        zoom: 15,
+      });
+
+	/*function getLatitudeAndLongitude () {
 		var latitude = 0, 
 			longitude = 0;
 		navigator.geolocation.getCurrentPosition(posOptions).then(function (position) {
@@ -87,4 +92,5 @@ angular.module('twisty.controllers', [])
 
 	var deviceOrientationOptions = {frequency: 1000};
 	navigator.compass.watchHeading(deviceOrientationOptions).then(null, onWatchHeadingError, onWatchHeadingSuccess);
+	*/
 });
