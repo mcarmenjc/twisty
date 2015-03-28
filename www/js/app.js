@@ -20,21 +20,26 @@ angular.module('twisty', ['ionic', 'twisty.controllers', 'twisty.services'])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
+  .state('twisty', {
+    abstract: true,
+    url: '/twisty',
+    templateUrl: 'templates/twisty.html'
+  })
 
-  .state('categorySelection', {
+  .state('twisty.categorySelection', {
     url: '/categorySelection',
     views: {
-      'category-selection': {
+      'app-view': {
         templateUrl: 'templates/category-selection.html',
         controller: 'CategorySelectionCtrl'
       }
     }
   })
 
-  .state('dashboard', {
+  .state('twisty.dashboard', {
       url: '/dashboard',
       views: {
-        'dashboard': {
+        'app-view': {
           templateUrl: 'templates/dashboard.html',
           controller: 'DashboardCtrl'
         }
@@ -42,6 +47,6 @@ angular.module('twisty', ['ionic', 'twisty.controllers', 'twisty.services'])
     });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/categorySelection');
+  $urlRouterProvider.otherwise('/twisty/categorySelection');
 
 });

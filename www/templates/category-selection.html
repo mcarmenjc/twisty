@@ -1,19 +1,21 @@
-<ion-view title="Category Selection">
+<ion-view hide-nav-bar="true">
   <ion-content>
-	<button class="button button-full button-positive">
-	  FOOD
-	</button>
-	<button class="button button-full button-balanced">
-	  DRINKS
-	</button>
-	<button class="button button-full button-energized">
-	  SITES
-	</button>
-	<button class="button button-full button-royal">
-	  CULTURE
-	</button>
-	<button class="button button-full button-assertive">
-	  SHOPPING
-	</button>
+  	<div ng-repeat="category in categories">
+	  	<button class="button button-full {{category.cssClass}}" ng-click="selectCategory(category.id)">
+	  		{{category.name}}
+	  	</button>
+	  	<div ng-show="isCategorySelected(category.id)" class="minute-selection">
+	  		<div class="center">
+		  		<ion-scroll zooming="false" direction="y" class="minutes-list">
+		  			<div class="list list-inset">
+		      			<div class="item" ng-repeat="minutes in minutesList" ng-click="selectMinutes(minutes)" ng-class="{active: isThisAmountOfMinutesSelected(minutes)}">
+		      				{{minutes}}
+		      			</div>
+		      		</div>
+	      		</ion-scroll>
+      		</div>
+	  		<button class="button button-dark">SHOW PLACES</button>
+	  	</div>
+  	</div>
   </ion-content>
 </ion-view>
