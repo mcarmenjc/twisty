@@ -56,7 +56,7 @@ angular.module('twisty.controllers', [])
     	return category;
   	};
 })
-.controller('DashboardCtrl', function($scope, $stateParams, twistyService) {
+.controller('DashboardCtrl', function($scope, $cordovaGeolocation, $cordovaDeviceOrientation, $stateParams, twistyService) {
 	$scope.category = $stateParams.categoryId;
 	$scope.minutes = $stateParams.minutes;
 	$scope.places = twistyService.getDashboard($stateParams.categoryId, $stateParams.minutes);
@@ -66,49 +66,48 @@ angular.module('twisty.controllers', [])
 	$scope.vbLoveItShare = false;
 
 	//{{nearestPlace.geolocation.latitude}},{{nearestPlace.geolocation.longitude}}
-	
-	// $scope.shareOnTwitter = function(){
-	// 	$scope.twitterShare = true;
-	// }
-	// $scope.shareOnFacebook = function(){
-	// 	$scope.facebookShare = true;
-	// }
-	// $scope.loveIt = function(){
-	// 	$scope.vbLoveItShare = true;
-	// }
 
+	var here, map, infowindow, sonar;
 	var bearings = [];
+	var position = {};
     var color = "#0c63ee";
-	var latitude = 51.5073509, longitude = -0.12775829999998223;
 	var categories = ['foods','drinks','sites','culture','shopping'];
 
-	function getLatitudeAndLongitude () {
-		navigator.geolocation.getCurrentPosition(posOptions).then(function (position) {
-	    	latitude  = position.coords.latitude;
-	    	longitude = position.coords.longitude;
-	    }, function(err) {
-
-	    });
-
-		return {latitude: latitude, longitude: longitude};
+	var colourClasses = ['food', 'drinks', 'sites', 'culture', 'shopping'];
+	$scope.colourTitleClass = colourClasses[$scope.category-1];
+	if ($scope.nearestPlace.url === '' || $scope.nearestPlace.url === null || $scope.nearestPlace.url === undefined){
+		$scope.nearestPlace.url = '#';
 	}
 
-	function onWatchHeadingSuccess(result) {   
-      	var posOptions = {timeout: 10000, enableHighAccuracy: false},
-      		position,
-      		magneticHeading;
-		position = getLatitudeAndLongitude ();
-        magneticHeading = result.magneticHeading;
-        $scope.places = twistyService.getNearestPlaces($scope.category, $scope.minutes, magneticHeading, position);
-        $scope.nearestPlace = $scope.places[0];
-    }
+	$scope.shareOnTwitter = function(){
+		$scope.twitterShare = true;
+	};
+	$scope.shareOnFacebook = function(){
+		$scope.facebookShare = true;
+	};
+	$scope.loveIt = function(){
+		$scope.vbLoveItShare = true;
+	};
+	$scope.hasAddress = function(){
+		if ($scope.nearestPlace.address !== '' && $scope.nearestPlace.address !== null && $scope.nearestPlace.address !== undefined){
+			return true;
+		}
+		else{
+			return false;
+		}
+	};
+	$scope.hasPhone = function(){
+		if ($scope.nearestPlace.phone !== '' && $scope.nearestPlace.phone !== null && $scope.nearestPlace.phone !== undefined){
+			return true;
+		}
+		else{
+			return false;
+		}
+	};
 
-    function onWatchHeadingError(error) {}
+	// Init
 
-    var sonar, map, here = new google.maps.LatLng(51.513871, -0.128329);
-    var infowindow = new google.maps.InfoWindow();
-
-    var styles = [
+	var styles = [
         {
           stylers: [
             { hue: color },
@@ -130,61 +129,47 @@ angular.module('twisty.controllers', [])
         }
     ];
 
+	function initializer(coordinate) {
 
-	here = new google.maps.LatLng(latitude, longitude);
-	map = new google.maps.Map(document.getElementById('map-canvas'), {
-	  center: here,
-	  zoom: 15,
-	});
+		position = coordinate;
 
-  	map.setOptions({styles: styles});
+		here = new google.maps.LatLng(position.latitude, position.longitude);
+		map = new google.maps.Map(document.getElementById('map-canvas'), {
+		    center: here,
+		    zoom: 15,
+		}).setOptions({styles: styles});
+		infowindow = new google.maps.InfoWindow();
+		sonar = new google.maps.Marker({
+		  icon: 'sonar.png',
+		  position: here,
+		  map: map,
+		  title: 'Aloha!'
+		});
 
-	sonar = new google.maps.Marker({
-	  icon: 'sonar.png',
-	  position: here,
-	  map: map,
-	  title: 'Aloha!'
-	});
+		$scope.places = twistyService.getNearestPlaces($scope.category, $scope.minutes, position.latitude, position.longitude);
+	    $scope.nearestPlace = $scope.places[0];
 
- 	var http_request = new XMLHttpRequest();
-	 
-	try {
-	    http_request = new XMLHttpRequest();
-	} catch (e) {
-	    try {
-	        http_request = new ActiveXObject("Msxml2.XMLHTTP");
-	    } catch (e) {
-	       	try {
-	        	http_request = new ActiveXObject("Microsoft.XMLHTTP");
-	       	} catch (e){
-	          alert("Your browser broke!");
-	          return false;
-	       }
-	    }
+	    for (var i in $scope.places) {
+	    	createMarker($scope.places[i]);
+	    	bearings.push(getBearing(here.lat(),here.lng(),$scope.places[i].lat,$scope.places[i].lng));
+   		}
 	}
 
-	http_request.onreadystatechange = function() {
-	    if (http_request.readyState == 4){
-	    	//var jsonObj = JSON.parse(http_request.responseText);
-	    	//callback(jsonObj);
+	function onWatchHeadingSuccess(result) {   
+        var difference, orientation = Math.round(result.magneticHeading*1000)/1000;
+        if(orientation > 180) { orientation -= 360; }
+
+	    for (var i = 0; i <= bearings.length; i++) { 
+	        var targetBearing = bearings[i];
+	        if(targetBearing > 180) { targetBearing -= 360; }
+	        var temp = Math.abs(orientation-targetBearing);
+	        if (temp < difference || difference == null) {
+	          difference = temp;
+	        }
 	    }
-	}
-
-	http_request.open("GET", "http://twisty.jit.su/venues/"+latitude+"/"+longitude+"/"+categories[$scope.category]+"/"+$scope.minutes, true);
-	http_request.send();
-
-    function callback(results) {
-
-       	for (var i in results) {
-        	createMarker(results[i]);
-        	bearings.push(getBearing(here.lat(),here.lng(),results[i].lat,results[i].lng));
-
-        	/* Populate front end */
-
-       	}
-
-      	window.addEventListener('deviceorientation', checkRadar, false);
     }
+
+    function onWatchHeadingError(error) {}
 
     function createMarker(place) {
 
@@ -223,20 +208,14 @@ angular.module('twisty.controllers', [])
       	return (degrees(Math.atan2(dLong, dPhi)) + 360.0) % 360.0;
     }
 
-    function checkRadar(eventData) {
-        var difference,orientation = Math.round(eventData.webkitCompassHeading*1000)/1000;
-        if(orientation > 180) { orientation -= 360; }
+    $cordovaGeolocation.getCurrentPosition({timeout: 10000, enableHighAccuracy: false}).then(null,
+    function(err) {
+      alert('err');
+    },function (position) {
+    	latitude  = position.coords.latitude;
+    	longitude = position.coords.longitude;
+    	initializer({latitude:latitude,longitude:longitude});
+    });
 
-	    for (var i = 0; i <= bearings.length; i++) { 
-	        var targetBearing = bearings[i];
-	        if(targetBearing > 180) { targetBearing -= 360; }
-	        var temp = Math.abs(orientation-targetBearing);
-	        if (temp < difference || difference == null) {
-	          difference = temp;
-	        }
-	    }
-    }
-
-	var deviceOrientationOptions = {frequency: 1000};
-	navigator.compass.watchHeading(deviceOrientationOptions).then(null, onWatchHeadingError, onWatchHeadingSuccess);
+	$cordovaDeviceOrientation.watchHeading({frequency: 1000}).then(null, onWatchHeadingError, onWatchHeadingSuccess);
 });

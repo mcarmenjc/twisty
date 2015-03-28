@@ -79,8 +79,9 @@
 	padding: 5px 5px 5px 5px;
 }
 
-.place-info p {
+.place-info h3 {
 	padding: 5px 15px 5px 15px;
+    text-align: center;
 }
 
 .place-map {
@@ -94,7 +95,6 @@
 .place-title {
 	text-align: left;
 	padding: 10px 10px 10px 10px;
-    background-color: #0c63ee;
 }
 
 .place-title h4 {
@@ -105,7 +105,31 @@
 	color: #fff;
 }
 
+.place-title a {
+    text-decoration: none;
+}
+
 .close {
 	float: right;
 	color: #000;
+}
+
+.food {
+    background-color: #0c63ee;
+}
+
+.drinks {
+    background-color: #33cd5f;
+}
+
+.sites {
+    background-color: #ffc900;
+}
+
+.culture {
+    background-color: #886aea;
+}
+
+.shopping {
+    background-color: #ef473a;
 }
