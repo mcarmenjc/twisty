@@ -23,7 +23,6 @@ angular.module('twisty.services', [])
       return nearestPlaces;
     },
     getNearestPlaces: function(categoryId, minutes, latitude, longitude) {
-      
       return nearestPlaces;
     }
   };

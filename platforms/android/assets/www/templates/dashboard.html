@@ -18,13 +18,13 @@
   		<p>Hours: {{nearestPlace.openAt}} - {{nearestPlace.closeAt}}</p>-->
   		<div class="row row-center">
 	  		<div class="col-20 col-offset-20">
-	  			<button class="button button-clear button-dark" href="#"><i class="fa fa-twitter-square fa-2x"></i></button>
+	  			<button class="button button-clear" ng-class="twitterShare ? 'button-calm' : 'button-dark'" ng-click="shareOnTwitter()"><i class="fa fa-twitter-square fa-2x"></i></button>
 	  		</div>
 	  		<div class="col-20">
-	  			<button class="button button-clear button-dark" href="#"><i class="fa fa-facebook-official fa-2x"></i></button>
+	  			<button class="button button-clear" ng-class="facebookShare ? 'button-positive' : 'button-dark'" ng-click="shareOnFacebook()"><i class="fa fa-facebook-official fa-2x"></i></button>
 	  		</div>
 	  		<div class="col-20">
-	  			<button class="button button-clear button-dark" href="#"><i class="fa fa-heart fa-2x"></i></button>
+	  			<button class="button button-clear" ng-class="vbLoveItShare ? 'button-assertive' : 'button-dark'" ng-click="loveIt()"><i class="fa fa-heart fa-2x"></i></button>
 	  		</div>
   		</div>
   		<a class="button button-full button-dark" href="http://maps.google.com/maps?saddr=Current%20Location&daddr={{nearestPlace.lat}},{{nearestPlace.lng}}&dirflg=w">TAKE ME THERE</a>
