@@ -19,7 +19,11 @@ angular.module('twisty.services', [])
     time:109
   }];
   return {
-    getDashboard: function(categoryId, minutes) {
+    getDashboard: function(categoryId, minutes, latitude, longitude) {
+      return nearestPlaces;
+    },
+    getNearestPlaces: function(categoryId, minutes, latitude, longitude) {
+      
       return nearestPlaces;
     }
   };
