@@ -64,21 +64,42 @@ angular.module('twisty.controllers', [])
 	$scope.twitterShare = false;
 	$scope.facebookShare = false;
 	$scope.vbLoveItShare = false;
+	var colourClasses = ['food', 'drinks', 'sites', 'culture', 'shopping'];
+	$scope.colourTitleClass = colourClasses[$scope.category-1];
+	if ($scope.nearestPlace.url === '' || $scope.nearestPlace.url === null || $scope.nearestPlace.url === undefined){
+		$scope.nearestPlace.url = '#';
+	}
 	//{{nearestPlace.geolocation.latitude}},{{nearestPlace.geolocation.longitude}}
-	var here = new google.maps.LatLng(51.513871, -0.128329),
+	/*var here = new google.maps.LatLng(51.513871, -0.128329),
 		map = new google.maps.Map(document.getElementById('map-canvas'), {
         center: here,
         zoom: 15,
-      });
+      });*/
 	$scope.shareOnTwitter = function(){
 		$scope.twitterShare = true;
-	}
+	};
 	$scope.shareOnFacebook = function(){
 		$scope.facebookShare = true;
-	}
+	};
 	$scope.loveIt = function(){
 		$scope.vbLoveItShare = true;
-	}
+	};
+	$scope.hasAddress = function(){
+		if ($scope.nearestPlace.address !== '' && $scope.nearestPlace.address !== null && $scope.nearestPlace.address !== undefined){
+			return true;
+		}
+		else{
+			return false;
+		}
+	};
+	$scope.hasPhone = function(){
+		if ($scope.nearestPlace.phone !== '' && $scope.nearestPlace.phone !== null && $scope.nearestPlace.phone !== undefined){
+			return true;
+		}
+		else{
+			return false;
+		}
+	};
 	/*function getLatitudeAndLongitude () {
 		var latitude = 0, 
 			longitude = 0;
