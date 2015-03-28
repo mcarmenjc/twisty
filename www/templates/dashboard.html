@@ -1,4 +1,17 @@
 <ion-view>
   <ion-content>
+  	<div class="place-header" style="background-image:url('{{nearestPlace.imageUrl}}')">
+  		<a class="close" href="#/twisty/categorySelection"><i class="icon ion-close-circled"></i></a>
+  	</div>
+  	<div class="place-title">
+  		<h4>{{nearestPlace.name}}</h4>
+  		<h6><i class="icon ion-clock"></i> {{nearestPlace.timeToGetThere}} mins away</h6>
+  	</div>
+  	<div class="place-info">
+  		<p>{{nearestPlace.description}}</p>
+  		<p>Phone: {{nearestPlace.phoneNumber}}</p>
+  		<p>Hours: {{nearestPlace.openAt}} - {{nearestPlace.closeAt}}</p>
+  		<a class="button button-full button-dark" href="#">TAKE ME THERE</a>
+  	</div>
   </ion-content>
 </ion-view>

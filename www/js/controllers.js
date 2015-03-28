@@ -58,4 +58,5 @@ angular.module('twisty.controllers', [])
 })
 .controller('DashboardCtrl', function($scope, $stateParams, twistyService) {
 	$scope.places = twistyService.getDashboard($stateParams.categoryId, $stateParams.minutes);
+	$scope.nearestPlace = $scope.places[0];
 });
