@@ -37,7 +37,7 @@ angular.module('twisty', ['ionic', 'twisty.controllers', 'twisty.services'])
   })
 
   .state('twisty.dashboard', {
-      url: '/dashboard/:categoryId',
+      url: '/dashboard/:categoryId/:minutes',
       views: {
         'app-view': {
           templateUrl: 'templates/dashboard.html',
