@@ -114,6 +114,16 @@
 /media/MATRI/VisitBritainHackathon/platforms/android/assets/www/lib/angular-animate/package.json \
 /media/MATRI/VisitBritainHackathon/platforms/android/assets/www/lib/angular-animate/angular-animate.js \
 /media/MATRI/VisitBritainHackathon/platforms/android/assets/www/css/style.css \
+/media/MATRI/VisitBritainHackathon/platforms/android/assets/www/css/fonts \
+/media/MATRI/VisitBritainHackathon/platforms/android/assets/www/css/fontawesome \
+/media/MATRI/VisitBritainHackathon/platforms/android/assets/www/css/fonts/fontawesome-webfont.ttf \
+/media/MATRI/VisitBritainHackathon/platforms/android/assets/www/css/fonts/fontawesome-webfont.woff2 \
+/media/MATRI/VisitBritainHackathon/platforms/android/assets/www/css/fonts/fontawesome-webfont.eot \
+/media/MATRI/VisitBritainHackathon/platforms/android/assets/www/css/fonts/fontawesome-webfont.woff \
+/media/MATRI/VisitBritainHackathon/platforms/android/assets/www/css/fonts/FontAwesome.otf \
+/media/MATRI/VisitBritainHackathon/platforms/android/assets/www/css/fonts/fontawesome-webfont.svg \
+/media/MATRI/VisitBritainHackathon/platforms/android/assets/www/css/fontawesome/font-awesome.min.css \
+/media/MATRI/VisitBritainHackathon/platforms/android/assets/www/css/fontawesome/font-awesome.css \
 /media/MATRI/VisitBritainHackathon/platforms/android/assets/www/plugins/com.ionic.keyboard \
 /media/MATRI/VisitBritainHackathon/platforms/android/assets/www/plugins/org.apache.cordova.statusbar \
 /media/MATRI/VisitBritainHackathon/platforms/android/assets/www/plugins/org.apache.cordova.device \
@@ -129,6 +139,7 @@
 /media/MATRI/VisitBritainHackathon/platforms/android/assets/www/plugins/org.apache.cordova.device-orientation/www/compass.js \
 /media/MATRI/VisitBritainHackathon/platforms/android/assets/www/plugins/org.apache.cordova.device-orientation/www/CompassHeading.js \
 /media/MATRI/VisitBritainHackathon/platforms/android/assets/www/img/ionic.png \
+/media/MATRI/VisitBritainHackathon/platforms/android/assets/www/js/angular-google-maps.min.js \
 /media/MATRI/VisitBritainHackathon/platforms/android/assets/www/js/controllers.js \
 /media/MATRI/VisitBritainHackathon/platforms/android/assets/www/js/services.js \
 /media/MATRI/VisitBritainHackathon/platforms/android/assets/www/js/app.js \

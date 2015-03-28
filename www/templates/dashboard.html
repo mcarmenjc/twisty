@@ -1,17 +1,33 @@
 <ion-view>
   <ion-content>
-  	<div class="place-header" style="background-image:url('{{nearestPlace.imageUrl}}')">
-  		<a class="close" href="#/twisty/categorySelection"><i class="icon ion-close-circled"></i></a>
-  	</div>
   	<div class="place-title">
-  		<h4>{{nearestPlace.name}}</h4>
-  		<h6><i class="icon ion-clock"></i> {{nearestPlace.timeToGetThere}} mins away</h6>
+  		<a class="close" href="#/twisty/categorySelection"><i class="icon ion-close-circled"></i></a>
+  		<div class="row">
+		  <div class="col">
+		    <img src="{{nearestPlace.icon.prefix}}88{{nearestPlace.icon.suffix}}" />
+		  </div>
+		  <div class="col col-center col-75">
+		    <h4>{{nearestPlace.name}}</h4>
+  			<h6><i class="icon ion-clock"></i> {{nearestPlace.travel.time/60 | setDecimal:2}} mins away</h6>
+		  </div>
+		</div>
   	</div>
   	<div class="place-info">
   		<p>{{nearestPlace.description}}</p>
-  		<p>Phone: {{nearestPlace.phoneNumber}}</p>
-  		<p>Hours: {{nearestPlace.openAt}} - {{nearestPlace.closeAt}}</p>
-  		<a class="button button-full button-dark" href="#">TAKE ME THERE</a>
+  		<!--<p>Phone: {{nearestPlace.phoneNumber}}</p>
+  		<p>Hours: {{nearestPlace.openAt}} - {{nearestPlace.closeAt}}</p>-->
+  		<div class="row row-center">
+	  		<div class="col-20 col-offset-20">
+	  			<button class="button button-clear" ng-class="twitterShare ? 'button-calm' : 'button-dark'" ng-click="shareOnTwitter()"><i class="fa fa-twitter-square fa-2x"></i></button>
+	  		</div>
+	  		<div class="col-20">
+	  			<button class="button button-clear" ng-class="facebookShare ? 'button-positive' : 'button-dark'" ng-click="shareOnFacebook()"><i class="fa fa-facebook-official fa-2x"></i></button>
+	  		</div>
+	  		<div class="col-20">
+	  			<button class="button button-clear" ng-class="vbLoveItShare ? 'button-assertive' : 'button-dark'" ng-click="loveIt()"><i class="fa fa-heart fa-2x"></i></button>
+	  		</div>
+  		</div>
+  		<a class="button button-full button-dark" href="http://maps.google.com/maps?saddr=Current%20Location&daddr={{nearestPlace.lat}},{{nearestPlace.lng}}&dirflg=w">TAKE ME THERE</a>
   	</div>
   	<div class="place-map" id="map-canvas">
   	</div>

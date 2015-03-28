@@ -13,6 +13,14 @@ angular.module('twisty', ['ionic', 'ngCordova', 'twisty.controllers', 'twisty.se
   });
 })
 
+.filter('setDecimal', function ($filter) {
+    return function (input, places) {
+        if (isNaN(input)) return input;
+        var factor = "1" + Array(+(places > 0 && places + 1)).join("0");
+        return Math.round(input * factor) / factor;
+    };
+})
+
 .config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states

@@ -61,12 +61,24 @@ angular.module('twisty.controllers', [])
 	$scope.minutes = $stateParams.minutes;
 	$scope.places = twistyService.getDashboard($stateParams.categoryId, $stateParams.minutes);
 	$scope.nearestPlace = $scope.places[0];
-
-	var map = new google.maps.Map(document.getElementById('map-canvas'), {
+	$scope.twitterShare = false;
+	$scope.facebookShare = false;
+	$scope.vbLoveItShare = false;
+	//{{nearestPlace.geolocation.latitude}},{{nearestPlace.geolocation.longitude}}
+	var here = new google.maps.LatLng(51.513871, -0.128329),
+		map = new google.maps.Map(document.getElementById('map-canvas'), {
         center: here,
         zoom: 15,
       });
-
+	$scope.shareOnTwitter = function(){
+		$scope.twitterShare = true;
+	}
+	$scope.shareOnFacebook = function(){
+		$scope.facebookShare = true;
+	}
+	$scope.loveIt = function(){
+		$scope.vbLoveItShare = true;
+	}
 	/*function getLatitudeAndLongitude () {
 		var latitude = 0, 
 			longitude = 0;

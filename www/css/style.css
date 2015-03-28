@@ -83,16 +83,6 @@
 	padding: 5px 15px 5px 15px;
 }
 
-.place-header {
-	padding: 5px 5px 5px 5px;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    height: 20% !important;
-  	display:block;
- 	width: auto !important;
-  
-}
-
 .place-map {
     height: 50% !important;
 }
