@@ -51,5 +51,11 @@ angular.module('twisty.controllers', [])
   	$scope.isThisAmountOfMinutesSelected = function(minutes) {
     	return $scope.selectedMinutes === minutes;
   	};
+  	$scope.getSelectedCategory = function() {
+    	var category = $scope.categories.find(function(cat) { return cat.id == $scope.selectedCategory });
+    	return category;
+  	};
 })
-.controller('DashboardCtrl', function($scope) {});
+.controller('DashboardCtrl', function($scope, $stateParams, twistyService) {
+	$scope.places = twistyService.getDashboard($stateParams.categoryId);
+});

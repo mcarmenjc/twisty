@@ -1,9 +1,9 @@
 angular.module('twisty.services', [])
 
-.factory('googleService', function() {
+.factory('twistyService', function() {
   return {
-    get: function() {
-      return null;
+    getDashboard: function(categoryId) {
+      return [1, 2, 3];
     }
   };
 });

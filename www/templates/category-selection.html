@@ -1,4 +1,4 @@
-<ion-view hide-nav-bar="true">
+<ion-view>
   <ion-content>
   	<div ng-repeat="category in categories">
 	  	<button class="button button-full {{category.cssClass}}" ng-click="selectCategory(category.id)">
@@ -10,11 +10,12 @@
 		  			<div class="list list-inset">
 		      			<div class="item" ng-repeat="minutes in minutesList" ng-click="selectMinutes(minutes)" ng-class="{active: isThisAmountOfMinutesSelected(minutes)}">
 		      				{{minutes}}
+		      				<span ng-if="isThisAmountOfMinutesSelected(minutes)">Min</span>
 		      			</div>
 		      		</div>
 	      		</ion-scroll>
       		</div>
-	  		<button class="button button-dark">SHOW PLACES</button>
+	  		<a class="button button-dark" href="#/twisty/dashboard/{{selectedCategory}}">SHOW PLACES</a>
 	  	</div>
   	</div>
   </ion-content>
