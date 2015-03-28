@@ -1,4 +1,4 @@
-angular.module('twisty', ['ionic', 'twisty.controllers', 'twisty.services'])
+angular.module('twisty', ['ionic', 'ngCordova', 'twisty.controllers', 'twisty.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

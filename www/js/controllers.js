@@ -57,6 +57,34 @@ angular.module('twisty.controllers', [])
   	};
 })
 .controller('DashboardCtrl', function($scope, $stateParams, twistyService) {
+	$scope.category = $stateParams.categoryId;
+	$scope.minutes = $stateParams.minutes;
 	$scope.places = twistyService.getDashboard($stateParams.categoryId, $stateParams.minutes);
 	$scope.nearestPlace = $scope.places[0];
+
+	function getLatitudeAndLongitude () {
+		var latitude = 0, 
+			longitude = 0;
+		navigator.geolocation.getCurrentPosition(posOptions).then(function (position) {
+		      latitude  = position.coords.latitude
+		      longitude = position.coords.longitude
+		    }, function(err) {});
+
+		return {latitude: latitude, longitude: longitude};
+	}
+
+	function onWatchHeadingSuccess(result) {   
+      	var posOptions = {timeout: 10000, enableHighAccuracy: false},
+      		position,
+      		magneticHeading;
+		position = getLatitudeAndLongitude ();
+        magneticHeading = result.magneticHeading;
+        $scope.places = twistyService.getNearestPlaces($scope.category, $scope.minutes, magneticHeading, position);
+        $scope.nearestPlace = $scope.places[0];
+    }
+
+    function onWatchHeadingError(error) {}
+
+	var deviceOrientationOptions = {frequency: 1000};
+	navigator.compass.watchHeading(deviceOrientationOptions).then(null, onWatchHeadingError, onWatchHeadingSuccess);
 });
