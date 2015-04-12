@@ -134,6 +134,7 @@ angular.module('twisty.controllers', [])
 		position = coordinate;
 
 		here = new google.maps.LatLng(position.latitude, position.longitude);
+            console.log(here);
 		map = new google.maps.Map(document.getElementById('map-canvas'), {
 		    center: here,
 		    zoom: 15,
