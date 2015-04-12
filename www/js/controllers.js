@@ -218,4 +218,5 @@ angular.module('twisty.controllers', [])
     });
 
 	$cordovaDeviceOrientation.watchHeading({frequency: 1000}).then(null, onWatchHeadingError, onWatchHeadingSuccess);
+
 });
