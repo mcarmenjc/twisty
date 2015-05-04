@@ -1,0 +1,38 @@
+<ion-view>
+  <ion-content>
+  	<div class="place-title {{colourTitleClass}}">
+  		<a class="close" href="#/twisty/categorySelection"><i class="icon ion-close-circled"></i></a>
+  		<div class="row">
+		  <div class="col">
+		    <a href="{{nearestPlace.url}}"><img src="{{nearestPlace.icon}}" /></a>
+		  </div>
+		  <div class="col col-center col-75">
+		  	<a href="{{nearestPlace.url}}">
+			    <h4>{{nearestPlace.name}}</h4>
+			    <h6 ng-if="hasAddress()">Address: {{nearestPlace.address}}</h6>
+	  			<h6 ng-if="hasPhone()">Phone: {{nearestPlace.phoneNumber}}</h6>
+  			</a>
+		  </div>
+		</div>
+  	</div>
+  	<div class="place-info">
+  		<h3>{{nearestPlace.rating}}</h3>
+        <p>{{(nearestPlace.opening_hours.open_now) ? 'Open' : 'Close' }}</p>
+        <p>{{nearestPlace.vicinity}}</p>
+  		<div class="row row-center">
+	  		<div class="col-20 col-offset-20">
+	  			<button class="button button-clear" ng-class="twitterShare ? 'button-calm' : 'button-dark'" ng-click="shareOnTwitter()"><i class="fa fa-twitter-square fa-2x"></i></button>
+	  		</div>
+	  		<div class="col-20">
+	  			<button class="button button-clear" ng-class="facebookShare ? 'button-positive' : 'button-dark'" ng-click="shareOnFacebook()"><i class="fa fa-facebook-official fa-2x"></i></button>
+	  		</div>
+	  		<div class="col-20">
+	  			<button class="button button-clear" ng-class="vbLoveItShare ? 'button-assertive' : 'button-dark'" ng-click="loveIt()"><i class="fa fa-heart fa-2x"></i></button>
+	  		</div>
+  		</div>
+  		<a class="button button-full button-dark" href="http://maps.google.com/maps?saddr={{lat}},{{lng}}&daddr={{nearestPlace.geometry.location.A}},{{nearestPlace.geometry.location.F}}&dirflg=w">TAKE ME THERE</a>
+  	</div>
+  	<div class="place-map" id="map-canvas">
+  	</div>
+  </ion-content>
+</ion-view>

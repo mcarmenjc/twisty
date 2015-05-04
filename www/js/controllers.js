@@ -159,6 +159,8 @@ angular.module('twisty.controllers', [])
 	function onWatchHeadingSuccess(result) {   
         var difference, orientation = Math.round(result.magneticHeading*1000)/1000;
         if(orientation > 180) { orientation -= 360; }
+            
+        console.log(orientation);
 
 	    for (var i = 0; i <= bearings.length; i++) { 
 	        var targetBearing = bearings[i];
@@ -218,6 +220,6 @@ angular.module('twisty.controllers', [])
     	initializer({latitude:latitude,longitude:longitude});
     });
 
-	$cordovaDeviceOrientation.watchHeading({frequency: 1000}).then(null, onWatchHeadingError, onWatchHeadingSuccess);
+	$cordovaDeviceOrientation.watchHeading({frequency: 100}).then(null, onWatchHeadingError, onWatchHeadingSuccess);
 
 });

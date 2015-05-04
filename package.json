@@ -18,5 +18,8 @@
     "org.apache.cordova.device-orientation",
     "org.apache.cordova.geolocation",
     "org.apache.cordova.statusbar"
+  ],
+  "cordovaPlatforms": [
+    "ios"
   ]
 }
